@@ -40,7 +40,7 @@ plugin.autoreply=function(data,next_to_go){
 
 	function pick_topics(arr) {
 		if (!arr.length) return
-		if (arr.length === 1) return 1
+		if (arr.length === 1) return arr[0]
 		var obj = {}
 		// 遍历数组
 		for (var i=0,l=arr.length;i<l;i++) {
@@ -81,12 +81,10 @@ plugin.autoreply=function(data,next_to_go){
 				})
 			},
 			function (admins,next) {
-				console.log(admins)
-				db.getSortedSetRevRange("tag:faq:topics",0,-1,function(err,the_topics){
+				db.getSortedSetRevRange("tag:recommend:topics",0,-1,function(err,the_topics){
 					async.each(the_topics,function (the_topic,callback) {
 						Topics.getTopicData(the_topic,function (err,topic) {
-							console.log(topic)
-							if(the_topics.indexOf(topic.uid)>=0){
+							if(admins.indexOf(topic.uid)>=0){
 								arr_to_recommend.push(topic)
 							}
 							callback();
@@ -94,6 +92,7 @@ plugin.autoreply=function(data,next_to_go){
 					},function (err){
 						if(err){
 							console.log(err)
+							next(err)
 						}else{
 							arr_to_recommend=arr_to_recommend.length>2?[arr_to_recommend[arr_to_recommend.length-2],arr_to_recommend[arr_to_recommend.length-1]]:arr_to_recommend; //取最后两项
 							next(null,arr_to_recommend)
