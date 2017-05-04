@@ -84,7 +84,7 @@ plugin.autoreply=function(data,next_to_go){
 				db.getSortedSetRevRange("tag:recommend:topics",0,-1,function(err,the_topics){
 					async.each(the_topics,function (the_topic,callback) {
 						Topics.getTopicData(the_topic,function (err,topic) {
-							if(admins.indexOf(topic.uid)>=0){
+							if(admins.indexOf(topic.uid)>=0&&!topic.deleted){
 								arr_to_recommend.push(topic)
 							}
 							callback();
@@ -126,12 +126,11 @@ plugin.autoreply=function(data,next_to_go){
 						_.pull(ARR,data.topic.tid)
 						var best_match_topics=pick_topics(ARR);
 						Topics.getTopicsData(best_match_topics,function (err,topics) {
-							console.log(topics)
 							if(topics.length<=2){
 								arr_to_recommend=topics;
 							}else{
 								for (var i=0;i<topics.length;i++){
-									if(admins.indexOf(topics[i].uid)>=0){
+									if(topics[i]&&admins.indexOf(topics[i].uid)>=0){
 										arr_to_recommend.push(topics[i])
 									}
 								}
