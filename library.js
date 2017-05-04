@@ -140,7 +140,7 @@ plugin.autoreply=function(data,next_to_go){
 								}else if(arr_to_recommend.length==1){
 									arr_to_recommend.push(topics[topics.length-1])
 								}else if(arr_to_recommend.length>2){
-									arr_to_recommend=[arr_to_recommend[0],arr_to_recommend[1]]
+									arr_to_recommend=[arr_to_recommend[arr_to_recommend.length-1],arr_to_recommend[arr_to_recommend.length-2]]
 								}
 							}
 							next(null,arr_to_recommend)
