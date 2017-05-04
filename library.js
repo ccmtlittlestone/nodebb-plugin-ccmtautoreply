@@ -84,7 +84,7 @@ plugin.autoreply=function(data,next_to_go){
 				db.getSortedSetRevRange("tag:recommend:topics",0,-1,function(err,the_topics){
 					async.each(the_topics,function (the_topic,callback) {
 						Topics.getTopicData(the_topic,function (err,topic) {
-							if(admins.indexOf(topic.uid)>=0&&!topic.deleted){
+							if(topic&&admins.indexOf(topic.uid)>=0&&topic.deleted=='0'){
 								arr_to_recommend.push(topic)
 							}
 							callback();
