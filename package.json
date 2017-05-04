@@ -1,0 +1,86 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+        "spec": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+        "type": "hosted",
+        "hosted": {
+          "type": "github",
+          "ssh": "git@github.com:ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+          "sshUrl": "git+ssh://git@github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+          "httpsUrl": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+          "gitUrl": "git://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+          "shortcut": "github:ccmtlittlestone/nodebb-plugin-ccmtautoreply",
+          "directUrl": "https://raw.githubusercontent.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply/master/package.json"
+        }
+      },
+      "/home/lingxiao/data/web/nodebb_ccmt"
+    ]
+  ],
+  "_from": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+  "_id": "nodebb-plugin-ccmtautoreply@1.0.0",
+  "_inCache": true,
+  "_location": "/nodebb-plugin-ccmtautoreply",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+    "spec": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+    "type": "hosted",
+    "hosted": {
+      "type": "github",
+      "ssh": "git@github.com:ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+      "sshUrl": "git+ssh://git@github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+      "httpsUrl": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+      "gitUrl": "git://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+      "shortcut": "github:ccmtlittlestone/nodebb-plugin-ccmtautoreply",
+      "directUrl": "https://raw.githubusercontent.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply/master/package.json"
+    }
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git#4666e5cb5e80f3213c6a80fabaa8d39e8b1e1f41",
+  "_shasum": "ca04dc3cb6f22f0e3613258b2da69998a10fc77b",
+  "_shrinkwrap": null,
+  "_spec": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git",
+  "_where": "/home/lingxiao/data/web/nodebb_ccmt",
+  "author": {
+    "name": "lingxiao",
+    "email": "lingxiao@ccmtlittlestone.com"
+  },
+  "bugs": {
+    "url": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply/issues"
+  },
+  "dependencies": {},
+  "description": "A starter kit for quickly creating NodeBB plugins",
+  "devDependencies": {},
+  "gitHead": "4666e5cb5e80f3213c6a80fabaa8d39e8b1e1f41",
+  "homepage": "https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply#readme",
+  "keywords": [
+    "nodebb",
+    "plugin"
+  ],
+  "license": "MIT",
+  "main": "library.js",
+  "name": "nodebb-plugin-ccmtautoreply",
+  "nbbpm": {
+    "compatibility": "^1.0.0"
+  },
+  "optionalDependencies": {},
+  "readme": "master\nasd\n# Quickstart Plugin for NodeBB\n\nA starter kit for quickly creating NodeBB plugins. Comes with a pre-setup LESS file, server side JS script with an `action:app.load` hook, and a client-side script. Most plugins need at least one of the above, so this ought to save you some time. For a full list of hooks have a look at our [wiki page](https://github.com/NodeBB/NodeBB/wiki/Hooks), and for more information about creating plugins please visit our [documentation portal](https://docs.nodebb.org/).\n\nFork this or copy it, and using your favourite text editor find and replace all instances of `nodebb-plugin-quickstart` with `nodebb-plugin-your-plugins-name`. Change the author's name in the LICENSE and package.json files.\n\nOnce you're done don't forget to publish it on NPM, and make a thread about it [here](https://docs.nodebb.org/en/latest/plugins/hooks.html).\n\n\n## Hello World\n\nReally simple, just edit `static/lib/main.js` and paste in `console.log('hello world');`, and that's it!\n\n## Installation\n\n    npm install nodebb-plugin-quickstart\n\n## Screenshots\n\nDon't forget to add screenshots!\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccmtlittlestone/nodebb-plugin-ccmtautoreply.git"
+  },
+  "version": "1.0.0"
+}
