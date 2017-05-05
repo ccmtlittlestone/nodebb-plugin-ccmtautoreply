@@ -39,8 +39,7 @@ plugin.addAdminNavigation = function(header, callback) {
 plugin.autoreply=function(data,next_to_go){
 
 	function pick_topics(arr) {
-		if (!arr.length) return
-		if (arr.length === 1) return arr[0]
+		if (arr.length <= 2) return arr
 		var obj = {}
 		// 遍历数组
 		for (var i=0,l=arr.length;i<l;i++) {
@@ -60,7 +59,6 @@ plugin.autoreply=function(data,next_to_go){
 			}
 		}
 		var arr_result=[];
-		console.log(typeof obj)
 		for(var key in obj){
 			if(obj[key]==maxNum){
 				arr_result.push(key)
@@ -123,27 +121,55 @@ plugin.autoreply=function(data,next_to_go){
 					if(err){
 						console.log(err)
 					}else {
-						_.pull(ARR,data.topic.tid)
-						var best_match_topics=pick_topics(ARR);
-						Topics.getTopicsData(best_match_topics,function (err,topics) {
-							if(topics.length<=2){
-								arr_to_recommend=topics;
-							}else{
-								for (var i=0;i<topics.length;i++){
-									if(topics[i]&&admins.indexOf(topics[i].uid)>=0){
-										arr_to_recommend.push(topics[i])
-									}
-								}
-								if(arr_to_recommend.length==0){
-									arr_to_recommend.push(topics[topics.length-1])
-									arr_to_recommend.push(topics[topics.length-2])
-								}else if(arr_to_recommend.length==1){
-									arr_to_recommend.push(topics[topics.length-1])
-								}else if(arr_to_recommend.length>2){
-									arr_to_recommend=[arr_to_recommend[arr_to_recommend.length-1],arr_to_recommend[arr_to_recommend.length-2]]
+						_.pull(ARR,data.topic.tid)  //拿掉这个帖子本身
+						var selected_arr=[];
+						Topics.getTopicsData(ARR,function(err,selected_topics) {
+						  	for(let i=0;i<selected_topics.length;i++){
+						  		if(selected_topics[i].cid=='24'){
+						  			selected_arr.push(selected_topics[i].tid)
 								}
 							}
-							next(null,arr_to_recommend)
+							var best_match_topics=pick_topics(selected_arr);
+							Topics.getTopicsData(best_match_topics,function (err,topics) {
+								if(topics.length==2){
+									arr_to_recommend=topics;
+									next(null,arr_to_recommend)
+								}else if(topics.length<2){
+									arr_to_recommend=topics;
+									db.getSortedSetRevRange("tag:recommend:topics",0,-1,function(err,the_topics){
+										async.each(the_topics,function (the_topic,callback) {
+											Topics.getTopicData(the_topic,function (err,topic) {
+												if(topic&&admins.indexOf(topic.uid)>=0&&topic.deleted=='0'&&arr_to_recommend.length<2){
+													arr_to_recommend.push(topic)
+												}
+												callback();
+											})
+										},function (err){
+											if(err){
+												console.log(err)
+												next(err)
+											}else{
+												next(null,arr_to_recommend)
+											}
+										})
+									})
+								}else{
+									for (var i=0;i<topics.length;i++){
+										if(topics[i]&&admins.indexOf(topics[i].uid)>=0){
+											arr_to_recommend.push(topics[i])
+										}
+									}
+									if(arr_to_recommend.length==0){
+										arr_to_recommend.push(topics[topics.length-1])
+										arr_to_recommend.push(topics[topics.length-2])
+									}else if(arr_to_recommend.length==1){
+										arr_to_recommend.push(topics[topics.length-1])
+									}else if(arr_to_recommend.length>2){
+										arr_to_recommend=[arr_to_recommend[arr_to_recommend.length-1],arr_to_recommend[arr_to_recommend.length-2]]
+									}
+									next(null,arr_to_recommend)
+								}
+							})
 						})
 					}
 				})
