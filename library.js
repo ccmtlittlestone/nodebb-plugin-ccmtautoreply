@@ -9,6 +9,7 @@ var async = require('async');
 var Topics = module.parent.require('../src/topics');
 var _=require("lodash");
 var nconf = module.parent.require('nconf');
+var meta = module.parent.require('./meta');
 
 plugin.init = function(params, callback) {
 	var router = params.router,
@@ -23,7 +24,16 @@ plugin.init = function(params, callback) {
 	router.get('/api/plugins/quickstart/categories', controllers.categoriesPage);
 	router.get('/api/plugins/quickstart/', controllers.renderPage);
 
+	// meta.settings.get('persona', function(err, settings) {
+	// 	config.enableAutoReply = settings.enableQuickReply === 'on';
+	// });
+
 	callback();
+};
+
+plugin.getThemeConfig = function(config, callback) {
+	config.enableAutoReply = 'on';
+	callback(false, config);
 };
 
 plugin.addAdminNavigation = function(header, callback) {

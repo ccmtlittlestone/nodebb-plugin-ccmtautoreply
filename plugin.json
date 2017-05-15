@@ -11,7 +11,8 @@
 		},
 		{
 			"hook": "filter:topic.get", "method":"autoreply"
-		}
+		},
+		{ "hook": "filter:config.get", "method": "getThemeConfig"}
 	],
 	"staticDirs": {
 		"static": "./static"
